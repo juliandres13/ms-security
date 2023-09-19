@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/role-permission")
+@RequestMapping("api/role-permission")
 public class RolePermissionsController {
     @Autowired
     private RolePermissionRepository theRolePermissionRepository;

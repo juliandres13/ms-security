@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-
 public class JWService {
     @Value("${jwt.secret}") // es nuestra clave secreta
     private String secret; // Esta es la clave secreta que se utiliza para firmar el token. Debe mantenerse segura.

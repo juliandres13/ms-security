@@ -14,9 +14,9 @@ import com.mssecurity.mssecurity.services.EncryptionService;
 
 @CrossOrigin
 @RestController // permitirá hacer crud
-@RequestMapping("/users") // los metodos de la clase se activaran cuando el cliente utilice esta ruta
+@RequestMapping("api/users") // los metodos de la clase se activaran cuando el cliente utilice esta ruta
 
-// en la basedata los datos estan planos, el frameworkse encarga de traer estos
+// en la database los datos estan planos, el frameworkse encarga de traer estos
 // datos y forma el objeto
 
 public class UsersController {

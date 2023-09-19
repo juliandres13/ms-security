@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @CrossOrigin
 @RestController
-@RequestMapping("security")
+@RequestMapping("api/public/security")
 //metodos login, logout, reset password
 public class SecurityController {
 
