@@ -4,15 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.mssecurity.mssecurity.models.Role;
 import com.mssecurity.mssecurity.repositories.RoleRepository;
@@ -40,6 +32,21 @@ public class RolesController {
     public Role show(@PathVariable String id) {
         Role theRole = this.theRoleRepository.findById(id).orElse(null);
         return theRole;
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("{id}")
+    public Role update(@PathVariable String id, @RequestBody Role theNewRole) {
+
+        Role theActualRole = this.theRoleRepository.findById(id).orElse(null);
+
+        if (theActualRole != null) {
+            theActualRole.setName(theNewRole.getName());
+            theActualRole.setDescription(theNewRole.getDescription());
+            return this.theRoleRepository.save(theActualRole);
+        } else {
+            return null;
+        }
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

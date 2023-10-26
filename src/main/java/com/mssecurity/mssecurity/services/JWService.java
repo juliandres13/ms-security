@@ -20,7 +20,8 @@ import java.util.Map;
 @Service
 public class JWService {
     @Value("${jwt.secret}") // es nuestra clave secreta
-    private String secret; // Esta es la clave secreta que se utiliza para firmar el token. Debe mantenerse segura.
+    private String secret; // Esta es la clave secreta que se utiliza para firmar el token. Debe mantenerse
+                           // segura.
     @Value("${jwt.expiration}")
     private Long expiration; // Tiempo de expiración del token en milisegundos.
     private Key secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);
@@ -60,6 +61,26 @@ public class JWService {
         } catch (Exception e) {
             // Otra excepción
             return false;
+        }
+    }
+
+    public User getUserFromToken(String token) {
+        try {
+            Jws<Claims> claimsJws = Jwts.parserBuilder()
+                    .setSigningKey(secretKey)
+                    .build()
+                    .parseClaimsJws(token);
+
+            Claims claims = claimsJws.getBody();
+
+            User user = new User();
+            user.set_id((String) claims.get("_id"));
+            user.setName((String) claims.get("name"));
+            user.setEmail((String) claims.get("email"));
+            return user;
+        } catch (Exception e) {
+            // En caso de que el token sea inválido o haya expirado
+            return null;
         }
     }
 }

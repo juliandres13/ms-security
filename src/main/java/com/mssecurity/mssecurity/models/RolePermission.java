@@ -17,8 +17,7 @@ public class RolePermission {
     @DBRef
     private Permission permission;
     
-    public RolePermission() {
-    }
+    public RolePermission() {}
 
     public String get_id() {
         return _id;
